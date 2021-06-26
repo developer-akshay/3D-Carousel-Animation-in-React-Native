@@ -1,10 +1,19 @@
 import * as React from 'react';
-import { FlatList, Image, Animated, Text, View, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-const { width, height } = Dimensions.get('screen');
-import { AntDesign } from '@expo/vector-icons';
+import {
+  FlatList,
+  Image,
+  Animated,
+  Text,
+  View,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+const {width, height} = Dimensions.get('screen');
+// import {AntDesign} from '@expo/vector-icons';
 import faker from 'faker';
-import { StatusBar } from 'expo-status-bar';
+import {StatusBar} from 'expo-status-bar';
 
 const IMAGE_WIDTH = width * 0.65;
 const IMAGE_HEIGHT = IMAGE_WIDTH * 0.7;
@@ -39,9 +48,9 @@ const DATA = [...Array(images.length).keys()].map((_, i) => {
 });
 const SPACING = 20;
 
-const Content = ({ item }) => {
+const Content = ({item}) => {
   return (
-    <>
+    <View>
       <Text
         style={{
           textAlign: 'center',
@@ -50,20 +59,18 @@ const Content = ({ item }) => {
           textTransform: 'uppercase',
         }}
         numberOfLines={1}
-        adjustsFontSizeToFit
-      >
+        adjustsFontSizeToFit>
         {item.title}
       </Text>
-      <Text style={{ fontSize: 12, opacity: 0.4 }}>{item.subtitle}</Text>
-      <View style={{ flexDirection: 'row', marginTop: SPACING }}>
+      <Text style={{fontSize: 12, opacity: 0.4}}>{item.subtitle}</Text>
+      <View style={{flexDirection: 'row', marginTop: SPACING}}>
         <Text
           style={{
             fontSize: 42,
             letterSpacing: 3,
             fontWeight: '900',
             marginRight: 8,
-          }}
-        >
+          }}>
           {item.price}
         </Text>
         <Text
@@ -72,41 +79,46 @@ const Content = ({ item }) => {
             lineHeight: 36,
             fontWeight: '800',
             alignSelf: 'flex-end',
-          }}
-        >
+          }}>
           USD
         </Text>
       </View>
-    </>
+    </View>
   );
 };
 
 export default () => {
   return (
-    <View style={{ backgroundColor: '#A5F1FA', flex: 1 }}>
+    <View style={{backgroundColor: '#A5F1FA', flex: 1}}>
       <StatusBar hidden />
-      <SafeAreaView style={{ marginTop: SPACING * 4 }}>
-        <View style={{ height: IMAGE_HEIGHT * 2.1 }}>
+      <SafeAreaView style={{marginTop: SPACING * 4}}>
+        <View style={{height: IMAGE_HEIGHT * 2.1}}>
           <FlatList
             data={DATA}
-            keyExtractor={(item) => item.key}
+            keyExtractor={item => item.key}
             horizontal
             pagingEnabled
             bounces={false}
-            style={{ flexGrow: 0 }}
-            contentContainerStyle={{ height: IMAGE_HEIGHT + SPACING * 2, paddingHorizontal: SPACING * 2 }}
+            style={{flexGrow: 0}}
+            contentContainerStyle={{
+              height: IMAGE_HEIGHT + SPACING * 2,
+              paddingHorizontal: SPACING * 2,
+            }}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item, index }) => {
+            renderItem={({item, index}) => {
               return (
                 <View
                   style={{
                     width,
                     paddingVertical: SPACING,
-                  }}
-                >
+                  }}>
                   <Image
-                    source={{ uri: item.image }}
-                    style={{ width: IMAGE_WIDTH, height: IMAGE_HEIGHT, resizeMode: 'cover' }}
+                    source={{uri: item.image}}
+                    style={{
+                      width: IMAGE_WIDTH,
+                      height: IMAGE_HEIGHT,
+                      resizeMode: 'cover',
+                    }}
                   />
                 </View>
               );
@@ -118,8 +130,7 @@ export default () => {
               alignItems: 'center',
               paddingHorizontal: SPACING * 2,
               marginLeft: SPACING * 2,
-            }}
-          >
+            }}>
             <Content item={DATA[0]} />
           </View>
           <View
@@ -127,7 +138,7 @@ export default () => {
               width: IMAGE_WIDTH + SPACING * 2,
               position: 'absolute',
               backgroundColor: 'white',
-              backfaceVisibility: true,
+              // backfaceVisibility: true,
               zIndex: -1,
               top: SPACING * 2,
               left: SPACING,
@@ -149,18 +160,17 @@ export default () => {
             width: IMAGE_WIDTH + SPACING * 4,
             paddingHorizontal: SPACING,
             paddingVertical: SPACING,
-          }}
-        >
-          <TouchableOpacity onPress={() => { }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <AntDesign name='swapleft' size={42} color='black' />
-              <Text style={{ fontSize: 12, fontWeight: '800' }}>PREV</Text>
+          }}>
+          <TouchableOpacity onPress={() => {}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              {/* <AntDesign name="swapleft" size={42} color="black" /> */}
+              <Text style={{fontSize: 12, fontWeight: '800'}}>PREV</Text>
             </View>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => { }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Text style={{ fontSize: 12, fontWeight: '800' }}>NEXT</Text>
-              <AntDesign name='swapright' size={42} color='black' />
+          <TouchableOpacity onPress={() => {}}>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
+              <Text style={{fontSize: 12, fontWeight: '800'}}>NEXT</Text>
+              {/* <AntDesign name="swapright" size={42} color="black" /> */}
             </View>
           </TouchableOpacity>
         </View>
